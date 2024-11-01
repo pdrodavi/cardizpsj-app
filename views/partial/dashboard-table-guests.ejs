@@ -1,0 +1,46 @@
+<div class="row row-cards">
+    <div class="col-12">
+        <div class="card">
+            <div class="table-responsive">
+                <table id="tabela" class="table table-vcenter card-table">
+                    <thead>
+                    <tr>
+                        <th class="text-center">Cod</th>
+                        <th class="text-center">Nome</th>
+                        <th class="text-center">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% todo.forEach(todos=>{ %>
+                        <tr>
+                            <td class="text-center"><%=todos.cod%></td>
+                            <td class="text-center"><%= todos.nome %></td>
+                            <td class="text-center">
+                                <a class="" style="text-decoration: none;" href="/dizimistas/carnes/<%=todos.cod%>" > Carne
+                           <span class="avatar avatar-sm bg-blue-lt text-blue">
+                              <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                 <path d="M9 7h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3" />
+                                 <path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3" />
+                                 <line x1="16" y1="5" x2="19" y2="8" />
+                              </svg>
+                           </span>
+                                </a>
+                                <a class="" style="text-decoration: none;" href="/dizimistas/<%=todos.cod%>/carnes/pagamento" > Pagamento
+                           <span class="avatar avatar-sm bg-danger-lt text-danger">
+                              <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                 <circle cx="12" cy="12" r="9" />
+                                 <path d="M10 10l4 4m0 -4l-4 4" />
+                              </svg>
+                           </span>
+                                </a>
+                            </td>
+                        </tr>
+                    <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

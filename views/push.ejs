@@ -1,0 +1,528 @@
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v3.8.5">
+    <title>GET DEV Program</title>
+
+    <link rel="canonical" href="https://getdev.idti.tech">
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!--<script src="https://www.gstatic.com/firebasejs/9.1.2/firebase-app.js"></script>-->
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="css/form-validation.css" rel="stylesheet">
+  </head>
+  <body class="bg-light">
+
+    <div class="container">
+  <div class="py-5 text-center">
+    <img class="d-block mx-auto mb-4" src="img/logo.png" alt="" width="80" height="80">
+    <h2>GET DEV Program</h2>
+    <p class="lead">Ajudando desenvolvedores em busca do emprego perfeito.</p>
+  </div>
+
+
+  <div class="row">
+
+    <div class="fixed-action-btn">
+      <a class="btn-floating btn-large red" href="/log">
+          <i class="material-icons left">arrow_back</i>
+      </a>
+    </div>
+
+
+    <div class="col-md-12 order-md-1">
+      <h4 class="mb-3">Conte que Dev é você</h4>
+       
+      <form action="/add/cv" method="POST" class="needs-validation" id="devform" novalidate>
+
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="firstName">Nome</label>
+            <input type="text" class="form-control" name="firstname" id="firstName" placeholder="" value="" required>
+            <div class="invalid-feedback">
+              Valid first name is required.
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="lastName">Sobrenome</label>
+            <input type="text" class="form-control" name="lastname" id="lastName" placeholder="" value="" required>
+            <div class="invalid-feedback">
+              Valid last name is required.
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="username">Username Github</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">@</span>
+            </div>
+            <input type="text" class="form-control" name="username" id="username" placeholder="Username" value="<%= userinfo.username %>" required>
+            <div class="invalid-feedback" style="width: 100%;">
+              Your username is required.
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="email">Email <span class="text-muted">(Para contato via email)</span></label>
+          <input type="email" class="form-control" name="email" id="email" placeholder="you@example.com" required>
+          <div class="invalid-feedback">
+            Please enter a valid email.
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-3 mb-3">
+            <label for="zip">CEP</label>
+            <input type="text" class="form-control" name="zipcode" onblur="pesquisacep(this.value);" onKeyPress="MascaraGenerica(this, 'CEP');" id="zip" placeholder="" required>
+            <div class="invalid-feedback">
+              Zip code required.
+            </div>
+          </div>
+          <div class="col-md-5 mb-3">
+            <label for="country">Cidade <span class="text-muted">(Autocompleta com o CEP)</span></label>
+            <input type="text" class="form-control" name="city" id="city" required>
+            <div class="invalid-feedback">
+              Please select a valid city.
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="state">Estado <span class="text-muted">(Autocompleta)</span></label>
+            <input type="text" class="form-control" name="state" id="state" required>
+            <div class="invalid-feedback">
+              Please provide a valid state.
+            </div>
+          </div>
+        </div>
+
+        <hr class="mb-4">
+
+        <!--formação-->
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <label for="country">Formação</label>
+            <select class="custom-select d-block w-100" id="education" required>
+              <option value="">Choose...</option>
+              <option value="Graduação">Graduação</option>
+              <option value="Pós-graduação">Pós-gradução</option>
+              <option value="Mestrado">Mestrado</option>
+              <option value="Doutorado">Doutorado</option>
+            </select>
+            <div class="invalid-feedback">
+              Please select a valid education.
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="state">Andamento</label>
+            <select class="custom-select d-block w-100" id="edustate" required>
+              <option value="">Choose...</option>
+              <option value="Concluído">Concluído</option>
+              <option value="Cursando">Cursando</option>
+            </select>
+            <div class="invalid-feedback">
+              Please provide a valid education status.
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="state">Nível</label>
+            <select class="custom-select d-block w-100" id="edunivel" required>
+              <option value="">Choose...</option>
+              <option value="Bacharelado">Bacharelado</option>
+              <option value="Licenciatura">Licenciatura</option>
+              <option value="Tecnólogo">Tecnólogo</option>
+            </select>
+            <div class="invalid-feedback">
+              Please provide a valid level academy.
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-3 mb-3">
+            <label for="country">Início</label>
+            <input type="date" class="form-control" id="edustart" required>
+          </div>
+          <div class="col-md-3 mb-3">
+            <label for="state">Fim</label>
+            <input type="date" class="form-control" id="eduend" required>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="zip">Curso</label>
+            <input type="text" class="form-control" id="course" placeholder="" required>
+            <div class="invalid-feedback">
+              Course is required.
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <label for="zip">Faculdade</label>
+            <input type="text" class="form-control" id="academy" placeholder="" required>
+            <div class="invalid-feedback">
+              Academy is required.
+            </div>
+          </div>
+
+        </div>
+
+        <hr class="mb-4">
+
+        <!--tipo dev-->
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <label for="country">Atuação</label>
+            <select class="custom-select d-block w-100" id="acting" required>
+              <option value="">Choose...</option>
+              <option value="Back-end">Back-end</option>
+              <option value="Front-end">Front-end</option>
+              <option value="Full Stack">Full Stack</option>
+              <option value="Mobile">Mobile</option>
+            </select>
+            <div class="invalid-feedback">
+              Please select a valid acting.
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="state">Linguagem Primária</label>
+            <select class="custom-select d-block w-100" id="primarylang" required>
+              <option value="">Choose...</option>
+              <option value="Java">Java</option>
+              <option value="Javascript">Javascript</option>
+              <option value="Python">Python</option>
+              <option value="Kotlin">Kotlin</option>
+              <option value="C++">C++</option>
+              <option value="C#">C#</option>
+              <option value="Swift">Swift</option>
+              <option value="Go">Go</option>
+              <option value="Ruby">Ruby</option>
+              <option value="PHP">PHP</option>
+            </select>
+            <div class="invalid-feedback">
+              Please provide a primary language.
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="state">Linguagem Secundária</label>
+            <select class="custom-select d-block w-100" id="secondarylang" required>
+              <option value="">Choose...</option>
+              <option value="Java">Java</option>
+              <option value="Javascript">Javascript</option>
+              <option value="Python">Python</option>
+              <option value="Kotlin">Kotlin</option>
+              <option value="C++">C++</option>
+              <option value="C#">C#</option>
+              <option value="Swift">Swift</option>
+              <option value="Go">Go</option>
+              <option value="Ruby">Ruby</option>
+              <option value="PHP">PHP</option>
+            </select>
+            <div class="invalid-feedback">
+              Please provide a secondary language.
+            </div>
+          </div>
+        </div>
+
+        <hr class="mb-4">
+
+        <!--stacks-->
+        <div class="row">
+
+          <div class="col-md-3 mb-3">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <input type="checkbox" name="skill" id="springweb" value="Spring Web" aria-label="Checkbox for following text input">
+                </div>
+              </div>
+              <label for="" class="form-control">Spring Web</label>
+            </div>
+          </div>
+
+          <div class="col-md-3 mb-3">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <input type="checkbox" name="skill" id="springbatch" value="Spring Batch" aria-label="Checkbox for following text input">
+                </div>
+              </div>
+              <label for="" class="form-control">Spring Batch</label>
+            </div>
+          </div>
+
+          <div class="col-md-3 mb-3">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <input type="checkbox" name="skill" id="springcloud" value="Spring Cloud" aria-label="Checkbox for following text input">
+                </div>
+              </div>
+              <label for="" class="form-control">Spring Cloud</label>
+            </div>
+          </div>
+
+          <div class="col-md-3 mb-3">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <input type="checkbox" name="skill" id="springdata" value="Spring Data" aria-label="Checkbox for following text input">
+                </div>
+              </div>
+              <label for="" class="form-control">Spring Data</label>
+            </div>
+          </div>
+
+          <div class="col-md-3 mb-3">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <input type="checkbox" name="skill" id="springmvc" value="Spring MVC" aria-label="Checkbox for following text input">
+                </div>
+              </div>
+              <label for="" class="form-control">Spring MVC</label>
+            </div>
+          </div>
+  
+          <div class="col-md-3 mb-3">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <input type="checkbox" name="skill" id="apachecamel" value="Apache Camel" aria-label="Checkbox for following text input">
+                </div>
+              </div>
+              <label for="" class="form-control">Apache Camel</label>
+            </div>
+          </div>
+
+          <div class="col-md-3 mb-3">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <input type="checkbox" name="skill" id="apachekafka" value="Apache Kafka" aria-label="Checkbox for following text input">
+                </div>
+              </div>
+              <label for="" class="form-control">Apache Kafka</label>
+            </div>
+          </div>
+
+          <div class="col-md-3 mb-3">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <input type="checkbox" name="skill" id="angular" value="Angular" aria-label="Checkbox for following text input">
+                </div>
+              </div>
+              <label for="" class="form-control">Angular</label>
+            </div>
+          </div>
+
+          <div class="col-md-2 mb-3">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <input type="checkbox" name="skill" id="react" value="React" aria-label="Checkbox for following text input">
+                </div>
+              </div>
+              <label for="" class="form-control">React</label>
+            </div>
+          </div>
+
+          <div class="col-md-2 mb-3">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <input type="checkbox" name="skill" id="flutter" value="Flutter" aria-label="Checkbox for following text input">
+                </div>
+              </div>
+              <label for="" class="form-control">Flutter</label>
+            </div>
+          </div>
+
+          <div class="col-md-2 mb-3">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <input type="checkbox" name="skill" id="net" value=".NET" aria-label="Checkbox for following text input">
+                </div>
+              </div>
+              <label for="" class="form-control">.NET</label>
+            </div>
+          </div>
+
+          <div class="col-md-2 mb-3">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <input type="checkbox" name="skill" id="flask" value="Flask" aria-label="Checkbox for following text input">
+                </div>
+              </div>
+              <label for="" class="form-control">Flask</label>
+            </div>
+          </div>
+
+          <div class="col-md-2 mb-3">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <input type="checkbox" name="skill" id="laravel" value="Laravel" aria-label="Checkbox for following text input">
+                </div>
+              </div>
+              <label for="" class="form-control">Laravel</label>
+            </div>
+          </div>
+
+          <div class="col-md-2 mb-3">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <input type="checkbox" name="skill" id="django" value="Django" aria-label="Checkbox for following text input">
+                </div>
+              </div>
+              <label for="" class="form-control">Django</label>
+            </div>
+          </div>
+
+          <div class="col-md-3 mb-3">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <input type="checkbox" name="skill" id="reactnative" value="React Native" aria-label="Checkbox for following text input">
+                </div>
+              </div>
+              <label for="" class="form-control">React Native</label>
+            </div>
+          </div>
+
+          <div class="col-md-2 mb-3">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <input type="checkbox" name="skill" id="vue" value="Vue" aria-label="Checkbox for following text input">
+                </div>
+              </div>
+              <label for="" class="form-control">Vue</label>
+            </div>
+          </div>
+
+          <div class="col-md-3 mb-3">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <input type="checkbox" name="skill" id="express" value="Express" aria-label="Checkbox for following text input">
+                </div>
+              </div>
+              <label for="" class="form-control">Express</label>
+            </div>
+          </div>
+
+          <div class="col-md-2 mb-3">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <input type="checkbox" name="skill" id="sql" value="SQL" aria-label="Checkbox for following text input">
+                </div>
+              </div>
+              <label for="" class="form-control">SQL</label>
+            </div>
+          </div>
+
+          <div class="col-md-2 mb-3">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <input type="checkbox" name="skill" id="nosql" value="noSQL" aria-label="Checkbox for following text input">
+                </div>
+              </div>
+              <label for="" class="form-control">noSQL</label>
+            </div>
+          </div>
+
+        </div>
+
+        <hr class="mb-4">
+
+        <div class="form-group col-md-12">
+          <label for="conquest">Conquistas</label>
+          <textarea class="form-control" id="conquest" rows="3"></textarea>
+        </div>
+
+        <div class="form-group col-md-12">
+          <label for="projects">Projetos</label>
+          <textarea class="form-control" id="projects" rows="3"></textarea>
+        </div>
+
+        <div class="form-group col-md-12">
+          <label for="experience">Experiência</label>
+          <textarea class="form-control" id="experience" rows="3"></textarea>
+        </div>
+
+        <div class="form-group col-md-12">
+          <label for="certificates">Certificados</label>
+          <textarea class="form-control" id="certificates" rows="3"></textarea>
+        </div>
+
+        <div class="form-group col-md-12">
+          <label for="highlights">Destaques</label>
+          <textarea class="form-control" id="highlights" rows="3"></textarea>
+        </div>
+
+        <div class="form-group col-md-12">
+          <label for="moreinfo">Mais informações</label>
+          <textarea class="form-control" id="moreinfo" rows="3"></textarea>
+        </div>
+
+        <hr class="mb-5">
+
+        <div class="row text-center">
+          <div class="col-md-6 mb-3">
+            <button class="btn btn-danger btn-block" type="reset">Reset</button>
+          </div>
+          <div class="col-md-6 mb-3">
+            <button class="btn btn-primary btn-block" type="submit">Enviar</button>
+          </div>
+        </div>
+
+        
+      </form>
+    </div>
+  </div>
+
+  <footer class="my-5 pt-5 text-muted text-center text-small">
+    <p class="mb-1">&copy; 2021-2022 IDTI</p>
+  </footer>
+</div>
+
+<script src="js/setdev.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      <script>window.jQuery || document.write('<script src="/docs/4.3/assets/js/vendor/jquery-slim.min.js"><\/script>')</script><script src="js/bootstrap.bundle.min.js"></script>
+        <script src="js/form-validation.js"></script></body>
+</html>
