@@ -2,7 +2,8 @@ const router = require('express').Router()
 const Todo_model=require('../models/todo');
 const apiAdapter = require('./apiAdapter')
 
-const BASE_URL = 'http://localhost:8080/tithe-management/v1'
+//const BASE_URL = 'http://localhost:8080/tithe-management/v1'
+const BASE_URL = 'https://apicardizpsj.pdro.com.br/tithe-management/v1'
 const api = apiAdapter(BASE_URL)
 
 router.get('/login',(req, res) => {
@@ -14,10 +15,25 @@ router.get('/' ,(req, res) => {
 })
 
 router.get("/dizimistas", async(req,res)=>{
+  res.render('dizimistas-home')
+})
+
+router.get("/dizimistas/buscar", async(req,res)=>{
+  res.render('buscar-dizimista')
+})
+
+router.get("/dizimista", async(req,res)=>{
+
+  api.get('/tithers/' + req.query.codDiz + '?searchBy=code').then(resp => {
+    res.render('dizimista', {todo:resp.data,userinfo:''})
+  })
+
+})
+
+router.get("/dizimistas/lista", async(req,res)=>{
     api.get('/tithers').then(resp => {
       res.render('dizimistas', {todo:resp.data,userinfo:''})
     })
-    
 })
 
 // /dizimistas/carnes/

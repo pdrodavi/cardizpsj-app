@@ -11,7 +11,7 @@
                     <div class="mdl-card__supporting-text">
                         <div class="container mt-5">
                             <div class="mdl-card__title2">
-                                <h2 class="mdl-card__title-text">Registrar Pagamento</h2>
+                                <h2 class="mdl-card__title-text">Buscar Dizimista por Código</h2>
                             </div>
                         </div>
                     </div>
@@ -21,29 +21,23 @@
                         <div class="mdl-card__supporting-text">
                             <div class="container mt-5">
                                 <div class="mdl-card__title2">
-                                    <h2 class="mdl-card__title-text">Dizimista: &nbsp; <b><%= todo.nome %></b></h2>
+                                    <form id="buscarDizimistaForm" name="buscarDizimistaForm" action="/dizimista" method="get">
+                                        <div class="inputBox">
+                                            <input class="mdl-textfield__input" id="codDiz" type="text" name="codDiz" placeholder="Digite o código do dizimista">
+                                        </div>
+                                      </form>
                                 </div>
                             </div>
                         </div>
-
-                        
-                        <form id="enviarPagamentoForm" name="enviarPagamentoForm" action="/dizimistas/carnes/pagamento" method="post">
-                            <div class="inputBox">
-                                <input id="nomeDiz" type="hidden" name="nomeDiz" value="<%= todo.nome %>">
-                                <input id="codDiz" type="hidden" name="codDiz" value="<%= todo.cod %>">
-                                <input class="mdl-textfield__input" id="valDiz" type="number" name="valDiz" placeholder="R$ 00,00">
-                            </div>
-                          </form>
-
                           <br>
-                        <a onclick="javascript:subEnviarPagamentoForm()" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                            Registrar Pagamento &nbsp; <i class="fa-solid fa-floppy-disk"></i>
+                        <a onclick="javascript:subBuscarDizimistaFormForm()" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                            Buscar &nbsp; <i class="fa-solid fa-magnifying-glass"></i>
                         </a>
                     </div>
 
                     <script>
-                        function subEnviarPagamentoForm() {
-                            document.getElementById("enviarPagamentoForm").submit();
+                        function subBuscarDizimistaFormForm() {
+                            document.getElementById("buscarDizimistaForm").submit();
                         }
                     </script>
 

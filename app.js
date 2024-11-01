@@ -1,12 +1,12 @@
 const express = require('express');
-const mongoose=require('mongoose');
 const path = require('path')
 const dotenv = require('dotenv')
 const methodOverride = require('method-override')
 const passport = require('passport')
 const session = require('express-session')
-const MongoStore = require('connect-mongo')(session)
-
+const compression = require('compression');
+const cookieParser = require('cookie-parser');
+const morgan = require('morgan');
 
 var app=express();
 const PORT = process.env.PORT||3000;
@@ -20,33 +20,25 @@ const PORT = process.env.PORT||3000;
 
 // Passport config
 //require('./config/passport')(passport)
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
 
-
-// Middleware
-app.use(express.urlencoded({extended:true}))
-app.use(express.static('public'))
-
-app.set('view engine','ejs');
-
-//app.use(
-//    session({
-  //    secret: 'keyboard cat',
-    //  resave: false,
-   //   saveUninitialized: false,
-    //  store: new MongoStore({ mongooseConnection: mongoose.connection }),
-   // })
- // )
-
-  // Passport middleware
-//app.use(passport.initialize())
-//app.use(passport.session())
-
+app.use(compression());
+app.use(morgan('dev'));
+app.use(express.json({limit: '50mb'}));
+app.use(express.urlencoded({ extended: true , limit: '50mb'}));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(require("./routes/index"))
 app.use('/auth', require('./routes/auth'))
 app.use(require("./routes/todo"))
 
-
+app.use(function(req, res) {
+  res.status(404).render('401', {
+    message: 'Not Found!'
+  });
+});
 
 
 // app.listen(3000, '192.168.101.9');

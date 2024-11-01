@@ -1,39 +1,28 @@
 <div class="row row-cards">
     <div class="col-12">
         <div class="card">
+            
+            <input class="mdl-textfield__input" id="txt_consulta" type="text" name="consulta" placeholder="Buscar por nome ou código">
+            <br>
+
             <div class="table-responsive">
-                <table id="tabela" class="table table-vcenter card-table">
+                <table id="tabela" class="mdl-data-table">
                     <thead>
                     <tr>
-                        <th class="text-center">Cod</th>
-                        <th class="text-center">Nome</th>
-                        <th class="text-center">Action</th>
+                        <th style="text-align: center">Cod</th>
+                        <th class="">Nome</th>
+                        <th class=""></th>
                     </tr>
                     </thead>
                     <tbody>
                     <% todo.forEach(todos=>{ %>
                         <tr>
-                            <td class="text-center"><%=todos.cod%></td>
-                            <td class="text-center"><%= todos.nome %></td>
-                            <td class="text-center">
-                                <a class="" style="text-decoration: none;" href="/dizimistas/carnes/<%=todos.cod%>" > Carne
-                           <span class="avatar avatar-sm bg-blue-lt text-blue">
-                              <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                 <path d="M9 7h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3" />
-                                 <path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3" />
-                                 <line x1="16" y1="5" x2="19" y2="8" />
-                              </svg>
-                           </span>
+                            <td style="text-align: center;"><%=todos.cod%></td>
+                            <td class=""><%= todos.nome %></td>
+                            <td class="">
+                                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="/dizimistas/carnes/<%=todos.cod%>"> Gerar Carnê &nbsp; <i class="fa-solid fa-file-pdf"></i>
                                 </a>
-                                <a class="" style="text-decoration: none;" href="/dizimistas/<%=todos.cod%>/carnes/pagamento" > Pagamento
-                           <span class="avatar avatar-sm bg-danger-lt text-danger">
-                              <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                 <circle cx="12" cy="12" r="9" />
-                                 <path d="M10 10l4 4m0 -4l-4 4" />
-                              </svg>
-                           </span>
+                                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="/dizimistas/<%=todos.cod%>/carnes/pagamento"> Registrar Pagamento &nbsp; <i class="fa-solid fa-file-invoice-dollar"></i>
                                 </a>
                             </td>
                         </tr>
