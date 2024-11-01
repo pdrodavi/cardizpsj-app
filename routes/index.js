@@ -2,8 +2,8 @@ const router = require('express').Router()
 const Todo_model=require('../models/todo');
 const apiAdapter = require('./apiAdapter')
 
-const BASE_URL = 'http://localhost:8080/tithe-management/v1'
-//const BASE_URL = 'https://apicardizpsj.pdro.com.br/tithe-management/v1'
+//const BASE_URL = 'http://localhost:8080/tithe-management/v1'
+const BASE_URL = 'https://apicardizpsj.pdro.com.br/tithe-management/v1'
 const api = apiAdapter(BASE_URL)
 
 router.get('/login',(req, res) => {
