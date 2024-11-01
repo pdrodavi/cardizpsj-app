@@ -2,8 +2,8 @@ const router = require('express').Router()
 const Todo_model=require('../models/todo');
 const apiAdapter = require('./apiAdapter')
 
-//const BASE_URL = 'http://localhost:8080/tithe-management/v1'
-const BASE_URL = 'https://apicardizpsj.pdro.com.br/tithe-management/v1'
+const BASE_URL = 'http://localhost:8080/tithe-management/v1'
+//const BASE_URL = 'https://apicardizpsj.pdro.com.br/tithe-management/v1'
 const api = apiAdapter(BASE_URL)
 
 router.get('/login',(req, res) => {
@@ -20,6 +20,44 @@ router.get("/dizimistas", async(req,res)=>{
 
 router.get("/dizimistas/buscar", async(req,res)=>{
   res.render('buscar-dizimista')
+})
+
+router.get("/relatorios", async(req,res)=>{
+  res.render('relatorios-home')
+})
+
+router.get("/relatorios/customizados", async(req,res)=>{
+  res.render('relatorios-customizados')
+})
+
+router.get("/relatorio/customizado", async(req,res)=>{
+  const resp = await api.get('/entries/period?interval=' + req.query.datePeriod);
+  let entradas = resp.data;
+    let totalSoma = 0;
+    entradas.forEach(function (item) {
+      totalSoma = totalSoma + item.valorPgto;
+      item.valorPgto = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(item.valorPgto);      
+    });
+    totalSoma = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(totalSoma); 
+    res.render('resultado-relatorio-customizado', {todo:resp.data, valorTotal: totalSoma, period: req.query.datePeriod})
+})
+
+router.get("/relatorio/dizimista", async(req,res)=>{
+  res.render('relatorio-dizimista')
+})
+
+router.get("/relatorio/dizimista/buscar", async(req,res)=>{
+  const respDiz = await api.get('/tithers/' + req.query.codDiz + '?searchBy=code');
+  api.get('/entries/' + req.query.codDiz + '?searchBy=code').then(resp => {
+    let entradas = resp.data;
+    let totalSoma = 0;
+    entradas.forEach(function (item) {
+      totalSoma = totalSoma + item.valorPgto;
+      item.valorPgto = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(item.valorPgto);      
+    });
+    totalSoma = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(totalSoma); 
+    res.render('resultado-relatorio-dizimista', {todo:resp.data,userinfo:respDiz.data, valorTotal: totalSoma})
+  })
 })
 
 router.get("/dizimista", async(req,res)=>{

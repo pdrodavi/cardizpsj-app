@@ -1,0 +1,38 @@
+<%- include('partial/body-open') %>
+
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-drawer">
+        
+        <%- include('partial/header-nav') %> 
+
+        <main class="mdl-layout__content">
+            <div class="page-content">
+                <div class="welcome-card">
+
+                    <div class="mdl-card__actions mdl-card--border">
+
+                        <div class="mdl-card__supporting-text">
+                            <div class="container mt-5">
+                                <div class="mdl-card__title2">
+                                    <h2 class="mdl-card__title-text">Relatórios de Pagamentos</h2>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mdl-card__actions mdl-card--border">
+                            <a href="/relatorio/dizimista" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                                Por Dizimistas &nbsp;
+                                <i class="fa-solid fa-file-pdf"></i>
+                            </a>
+                            <a href="/relatorios/customizados" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                                Relatório customizado &nbsp;
+                                <i class="fa-solid fa-file-invoice-dollar"></i>
+                            </a>
+                        </div>
+                       
+                    </div>
+
+                </div>
+            </div>
+        </main>
+    </div>
+    <%- include('partial/body-close') %>    

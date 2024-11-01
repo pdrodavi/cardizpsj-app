@@ -1,0 +1,35 @@
+<div class="row row-cards">
+    <div class="col-12">
+        <div class="card">
+            <div class="table-responsive">
+                <table id="tabela" class="mdl-data-table">
+                    <thead>
+                    <tr>
+                        <th style="text-align: center">ID</th>
+                        <th class="">Valor</th>
+                        <th class="">Data</th>
+                        <th class="">Nome</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% todo.forEach(todos=>{ %>
+                        <tr>
+                            <td style="text-align: center;"><%=todos.id%></td>
+                            <td class=""><%= todos.valorPgto %></td>
+                            <td class=""><%= todos.dataPgto %></td>
+                            <td class=""><%= todos.nome %></td>
+                        </tr>
+                    <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="mdl-card__supporting-text">
+            <div class="container mt-5">
+                <div class="mdl-card__title2">
+                    <h2 style="font-size: 18px;" class="mdl-card__title-text">Valor Total: &nbsp; <b><%= valorTotal %></h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

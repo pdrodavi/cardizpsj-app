@@ -1,0 +1,31 @@
+<%- include('partial/body-open') %>
+
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-drawer">
+
+        <%- include('partial/header-nav') %> 
+
+        <main class="mdl-layout__content">
+            <div class="page-content">
+                <div class="welcome-card">
+
+                    <div class="mdl-card__supporting-text">
+                        <div class="container mt-5">
+                            <div class="mdl-card__title2">
+                                <h2 class="mdl-card__title-text">Período: &nbsp; <b><%= period %></b></h2>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mdl-card__supporting-text">
+                        <div class="container mt-5 ">
+
+                            <%- include('partial/pagamentos-relatorios-customizados-table') %>
+                    
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <%- include('partial/body-close') %>    

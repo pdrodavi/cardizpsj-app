@@ -1,0 +1,48 @@
+<%- include('partial/body-open') %>
+
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-drawer">
+        
+        <%- include('partial/header-nav') %> 
+
+        <main class="mdl-layout__content">
+            <div class="page-content">
+                <div class="welcome-card">
+
+                    <div class="mdl-card__supporting-text">
+                        <div class="container mt-5">
+                            <div class="mdl-card__title2">
+                                <h2 class="mdl-card__title-text">Relatório por Código do Dizimista</h2>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mdl-card__actions mdl-card--border">
+
+                        <div class="mdl-card__supporting-text">
+                            <div class="container mt-5">
+                                <div class="mdl-card__title2">
+                                    <form id="buscarDizimistaForm" name="buscarDizimistaForm" action="/relatorio/dizimista/buscar" method="get">
+                                        <div class="inputBox">
+                                            <input class="mdl-textfield__input" id="codDiz" type="text" name="codDiz" placeholder="Digite o código do dizimista">
+                                        </div>
+                                      </form>
+                                </div>
+                            </div>
+                        </div>
+                          <br>
+                        <a onclick="javascript:subBuscarDizimistaFormForm()" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                            Buscar &nbsp; <i class="fa-solid fa-magnifying-glass"></i>
+                        </a>
+                    </div>
+
+                    <script>
+                        function subBuscarDizimistaFormForm() {
+                            document.getElementById("buscarDizimistaForm").submit();
+                        }
+                    </script>
+
+                </div>
+            </div>
+        </main>
+    </div>
+    <%- include('partial/body-close') %>    
